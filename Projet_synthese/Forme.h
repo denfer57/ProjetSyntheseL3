@@ -1,4 +1,5 @@
 #pragma once
+#include <math.h>
 #include "Couleur.h"
 #include "Point.h"
 class Visiteur;
@@ -19,6 +20,10 @@ public:
 	void setCouleur(const Couleur & couleur);
 
 	virtual void visite(Visiteur *v) = 0;
+	virtual void translation(double translationX, double translationY) = 0;
+	virtual void homothetie(const Point & p, double rapport) = 0;
+	virtual void rotation(const Point & p, double angle) = 0;
+	virtual double calculAire() = 0;
 
 	virtual Forme * clone() const = 0;
 };

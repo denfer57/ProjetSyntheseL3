@@ -11,5 +11,4 @@ public:
 	virtual void visite(Polygone * p) = 0;
 	virtual void visite(Groupe * g) = 0;
 	virtual void visite(Segment * s) = 0;
-	virtual void visite(Point * p) = 0;
 };

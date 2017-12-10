@@ -16,12 +16,13 @@ public :
 	void setMilieu(const Point & milieu);
 	void setRayon(double rayon);
 
-	/* a faire
-	void translation(const Vecteur & v);
+	void translation(double translationX, double translationY);
 	void homothetie(const Point & p, double rapport);
 	void rotation(const Point & p, double angle);
-	*/
+
 	void visite(Visiteur * v);
+
+	double calculAire();
 
 	Cercle * clone() const;
 };

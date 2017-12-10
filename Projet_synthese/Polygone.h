@@ -11,6 +11,11 @@ public :
 	Polygone();
 	Polygone(vector<Point> points);
 
+	void translation(double translationX, double translationY);
+	void homothetie(const Point & p, double rapport);
+	void rotation(const Point & p, double angle);
+	double calculAire();
+
 	void visite(Visiteur * v);
 
 };

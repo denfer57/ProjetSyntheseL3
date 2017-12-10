@@ -10,6 +10,12 @@ public :
 	Groupe();
 	virtual ~Groupe();
 
-	void Groupe::formeNonGroupee();
+	void formeNonGroupee();
+	void translation(double translationX, double translationY);
+	void homothetie(const Point & p, double rapport);
+	void rotation(const Point & p, double angle);
+
 	void visite(Visiteur * v);
+
+	double calculAire();
 };

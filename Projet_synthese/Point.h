@@ -25,6 +25,10 @@ public:
 	*
 	* */
 	inline Point(const char * s);
+	inline const double getX () const;
+	inline const double getY () const;
+	inline void setX(const double newX);
+	inline void setY(const double newY);
 	inline const Point operator + (const Point & u) const;
 	inline const Point operator * (const double & a) const;
 	/**
@@ -45,6 +49,26 @@ Point(const double & x, const double & y) : x(x), y(y) {}
 
 inline Point::Point(const char * s)
 {
+}
+
+inline const double Point::getX() const
+{
+	return x;
+}
+
+inline const double Point::getY() const
+{
+	return y;
+}
+
+inline void Point::setX(const double newX)
+{
+	x = newX;
+}
+
+inline void Point::setY(const double newY)
+{
+	y = newY;
 }
 
 inline const Point Point::operator + (const Point & u) const

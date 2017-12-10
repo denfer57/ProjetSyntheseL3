@@ -16,11 +16,11 @@ public:
 
 	void setA(const Point &a);
 	void setB(const Point &b);
-	void visite(Visiteur * v);
-	/*a faire
-	void visite(Visiteur * v);
-	void translation(const Vecteur & v);
+
+	void translation(double translationX, double translationY);
 	void homothetie(const Point & p, double rapport);
 	void rotation(const Point & p, double angle);
-	*/
+	double calculAire();
+
+	void visite(Visiteur * v);
 };
