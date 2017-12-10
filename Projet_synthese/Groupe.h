@@ -11,4 +11,5 @@ public :
 	virtual ~Groupe();
 
 	void Groupe::formeNonGroupee();
+	void visite(Visiteur * v);
 };

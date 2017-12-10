@@ -8,8 +8,17 @@ class Forme {
 	friend class Groupe;
 private :
 	Couleur _couleur;
-	string _nom;
 	bool  estDansGroupe;
 public:
 	Forme();
+	Forme(const Couleur & couleur);
+	Forme(const Forme & forme);
+
+	const Couleur & getCouleur();
+
+	void setCouleur(const Couleur & couleur);
+
+	virtual void visite(Visiteur *v) = 0;
+
+	virtual Forme * clone() const = 0;
 };

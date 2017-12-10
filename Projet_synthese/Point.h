@@ -43,6 +43,10 @@ inline const Point operator *(const double & a, const Point & u) { return u*a; }
 inline  Point::
 Point(const double & x, const double & y) : x(x), y(y) {}
 
+inline Point::Point(const char * s)
+{
+}
+
 inline const Point Point::operator + (const Point & u) const
 {
 	return Point(x + u.x, y + u.y);

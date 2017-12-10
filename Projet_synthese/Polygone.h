@@ -11,4 +11,6 @@ public :
 	Polygone();
 	Polygone(vector<Point> points);
 
+	void visite(Visiteur * v);
+
 };

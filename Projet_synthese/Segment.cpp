@@ -1,4 +1,5 @@
 #include "Segment.h"
+#include "Visiteur.h"
 
 Segment::Segment(Point & a, Point & b) : _a(a), _b(b){ }
 
@@ -22,4 +23,9 @@ void Segment::setA(const Point & a)
 void Segment::setB(const Point & b)
 {
 	_b = b;
+}
+
+void Segment::visite(Visiteur *v)
+{
+	v->visite(this);
 }

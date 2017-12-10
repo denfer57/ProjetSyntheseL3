@@ -16,6 +16,7 @@ public:
 
 	void setA(const Point &a);
 	void setB(const Point &b);
+	void visite(Visiteur * v);
 	/*a faire
 	void visite(Visiteur * v);
 	void translation(const Vecteur & v);
