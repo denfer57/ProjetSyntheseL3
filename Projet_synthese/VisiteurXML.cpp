@@ -37,7 +37,11 @@ string VisiteurXML::envoiInfos(Segment * s)
 string VisiteurXML::envoiInfos(Polygone * p)
 {
 	ostringstream oss;
-	oss << "Polygone / "  << p->getCouleur();
+	oss << "Polygone / " << p->getCouleur();
+	int nbPoints = p->getNombrePoints();
+	for (int i = 0; i < nbPoints; i++) {
+		oss << " / " << (*p)[i];
+	}
 	return string(oss.str());
 }
 

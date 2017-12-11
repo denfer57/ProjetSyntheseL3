@@ -5,6 +5,8 @@ Polygone::Polygone(){ }
 
 Polygone::Polygone(vector<Point> points) : listesPoints(points){ }
 
+Polygone::Polygone(const Couleur & couleur) : Forme(couleur) { }
+
 string Polygone::toString() const
 {
 	ostringstream oss;
@@ -107,4 +109,20 @@ double Polygone::calculAire()
 	}
 	aireGlobale = (xFirst - yFirst) / 2;
 	return aireGlobale;
+}
+
+void Polygone::ajoutePoint(Point & p)
+{
+	//test si il existe deja
+	listesPoints.push_back(p);
+}
+
+Point Polygone::operator[](int pos) const
+{
+	return listesPoints[pos];
+}
+
+Polygone * Polygone::clone() const
+{
+	return new Polygone(*this);
 }

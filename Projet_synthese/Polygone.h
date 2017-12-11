@@ -10,6 +10,7 @@ private :
 public :
 	Polygone();
 	Polygone(vector<Point> points);
+	Polygone(const Couleur & couleur);
 
 	string toString() const;
 
@@ -19,5 +20,8 @@ public :
 	void homothetie(const Point & p, double rapport);
 	void rotation(const Point & p, double angle);
 	double calculAire();
+	void ajoutePoint(Point & p);
 
+	Point operator[](int pos) const;
+	Polygone * clone() const;
 };

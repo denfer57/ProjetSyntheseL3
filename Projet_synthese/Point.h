@@ -84,3 +84,5 @@ inline const Point Point::operator - () const
 	return Point(-x, -y);
 }
 
+
+

@@ -7,11 +7,10 @@ public class ChaineDessin {
 	public static DessinCOR getChaine() {
 		if (chaine == null)
 		{
-			//DecodeDessinCOR decodeDessinGroupe = new DecodeDessinGroupeCOR(null);
-			//DecodeDessinCOR decodeDessinPolygone = new DecodeDessinPolygoneCOR(decodeDessinGroupe);
 			DessinCOR dechiffreDessinCercle = new RealiseDessinCercleCOR(null);
 			DessinCOR dechiffreDessinSegment = new RealiseDessinSegmentCOR(dechiffreDessinCercle);
-			chaine = dechiffreDessinSegment;
+			DessinCOR decodeDessinPolygone = new RealiseDessinPolygoneCOR(dechiffreDessinSegment);
+			chaine = decodeDessinPolygone;
 		}
 		return chaine;
 	}
