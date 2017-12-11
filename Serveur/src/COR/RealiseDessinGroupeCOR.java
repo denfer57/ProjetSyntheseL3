@@ -15,7 +15,7 @@ public class RealiseDessinGroupeCOR extends DessinCOR {
 		try
 		{
 			String[] tab = dessin.trim().split("\n");
-			if (tab.length > 2)//au moins 1 forme dans le groupe
+			if (tab.length > 2)//au moins 2 formes dans le groupe
 			{
 				for (String forme : tab){
 					if (forme.startsWith("*")){

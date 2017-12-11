@@ -18,22 +18,35 @@ void testDessin(Forme *);
 
 void main()
 {
+	//Cercle OK, Segment OK, Polygone OK, Groupe OK, homothétie OK
+	//revoir formule calcul aire polygone ?!, cercle OK, segment OK(obvious)
+	//revoir rotation polygone ?!, segment OK, cercle OK(obvious)
 	Forme * dessin = faitDessin();
 	testDessin(dessin);
 	system("Pause");
 }
 
 Forme * faitDessin() {
-	//Cercle OK, Segment OK, Polygone OK
 	Cercle * c = new Cercle(Point(300, 300), 30, Couleur::Yellow);
+
 	Segment * s = new Segment(Point(300, 300), Point(300, 400), Couleur("#0000FF"));
-	/*Polygone * p = new Polygone(Couleur::Cyan);
+
+	Polygone * p = new Polygone(Couleur::Cyan);
 	p->ajoutePoint(Point(80, 100));
 	p->ajoutePoint(Point(130, 100));
-	p->ajoutePoint(Point(105, 50));*/
+	p->ajoutePoint(Point(105, 50));
+
+	//s->rotation(Point(300, 300), 180);
+
+	//c->homothetie(Point(300, 300), 2);
+
 	Groupe * g = new Groupe();
+
 	g->ajouteForme(c);
-	g->ajouteForme(s);
+	g->ajouteForme(s); 
+	g->ajouteForme(p);
+	
+	//cout << c->calculAire() << "\n";
 
 	return g;
 }
