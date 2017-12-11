@@ -10,7 +10,7 @@ Polygone::Polygone(const Couleur & couleur) : Forme(couleur) { }
 string Polygone::toString() const
 {
 	ostringstream oss;
-	oss << " : { { ";
+	oss << "Polygone : { Points : { ";
 	int taille = listesPoints.size();
 	for (int i = 0; i < taille; i++)
 	{
@@ -113,7 +113,7 @@ double Polygone::calculAire()
 
 void Polygone::ajoutePoint(Point & p)
 {
-	//test si il existe deja
+	//tester s'il existe deja
 	listesPoints.push_back(p);
 }
 

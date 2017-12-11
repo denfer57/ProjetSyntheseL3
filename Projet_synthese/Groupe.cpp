@@ -1,6 +1,22 @@
 #include "Groupe.h"
 #include "Visiteur.h"
 
+string Groupe::toString() const
+{
+	ostringstream oss;
+	oss << "Groupe : { Formes : { ";
+	int nbFormes = listeFormes.size();
+	for (int i = 0; i < nbFormes; i++)
+	{
+		oss << listeFormes[i];
+		if (nbFormes > i + 1)
+			oss << ",";
+		oss << " ";
+	}
+	oss << "}, Couleur : " << getCouleur() << " }";
+	return oss.str();
+}
+
 Groupe::Groupe(){ }
 
 Groupe::~Groupe()
@@ -64,5 +80,21 @@ double Groupe::calculAire()
 		aireGroupe += formeCourante->calculAire();
 	}
 	return aireGroupe;
+}
+
+void Groupe::ajouteForme(Forme * f)
+{
+	//tester si elle existe deja
+	listeFormes.push_back(f);
+}
+
+Forme * Groupe::operator[](int pos) const
+{
+	return listeFormes[pos];
+}
+
+Groupe * Groupe::clone() const
+{
+	return new Groupe(*this);;
 }
 

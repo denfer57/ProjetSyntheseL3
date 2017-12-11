@@ -16,6 +16,8 @@ string VisiteurXML::chercheForme(Forme * f)
 		return envoiInfos(p);
 	else if (g != NULL)
 		return envoiInfos(g);
+	else
+		return Erreur("La forme n'existe pas");
 }
 
 string VisiteurXML::envoiInfos(Cercle * c)
@@ -49,5 +51,9 @@ string VisiteurXML::envoiInfos(Groupe * g)
 {
 	ostringstream oss;
 	oss << "Groupe / " << g->getCouleur();
+	int nbFormes = g->getNombreForme();
+	for (int i = 0; i < nbFormes; i++) {
+		oss << endl << "*" << chercheForme((*g)[i]);
+	}
 	return string(oss.str());
 }

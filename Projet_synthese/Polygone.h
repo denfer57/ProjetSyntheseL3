@@ -6,13 +6,11 @@
 class Polygone : public Forme {
 private :
 	vector<Point> listesPoints;
-
+	string toString() const;
 public :
 	Polygone();
 	Polygone(vector<Point> points);
 	Polygone(const Couleur & couleur);
-
-	string toString() const;
 
 	int getNombrePoints();
 	void visite(Visiteur * v);
