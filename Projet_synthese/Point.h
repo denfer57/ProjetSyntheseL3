@@ -12,23 +12,20 @@ inline const T operator - (const T & u, const T & v)
 	return u + -v;
 }
 
-
-
 class Point
 {
 	double x, y;
 public:
 	inline explicit Point(const double & x = 0, const double & y = 0);
-
+	inline const double getX() const;
+	inline const double getY() const;
+	inline void setX(const double newX);
+	inline void setY(const double newY);
 	/**
 	* DONNEES : s respectant le format "(  nombre réel, nombre réel)"
 	*
 	* */
 	inline Point(const char * s);
-	inline const double getX () const;
-	inline const double getY () const;
-	inline void setX(const double newX);
-	inline void setY(const double newY);
 	inline const Point operator + (const Point & u) const;
 	inline const Point operator * (const double & a) const;
 	/**
@@ -37,19 +34,9 @@ public:
 	inline const Point operator - () const;
 
 	operator string() const;
+	friend ostream & operator<<(ostream & os, const Point & point);
 
 };
-
-inline const Point operator *(const double & a, const Point & u) { return u*a; }
-
-//------------ implémentation des fonctions inline ----------------------
-
-inline  Point::
-Point(const double & x, const double & y) : x(x), y(y) {}
-
-inline Point::Point(const char * s)
-{
-}
 
 inline const double Point::getX() const
 {
@@ -69,6 +56,17 @@ inline void Point::setX(const double newX)
 inline void Point::setY(const double newY)
 {
 	y = newY;
+}
+
+inline const Point operator *(const double & a, const Point & u) { return u*a; }
+
+//------------ implémentation des fonctions inline ----------------------
+
+inline  Point::
+Point(const double & x, const double & y) : x(x), y(y) {}
+
+inline Point::Point(const char * s)
+{
 }
 
 inline const Point Point::operator + (const Point & u) const

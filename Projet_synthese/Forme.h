@@ -1,4 +1,5 @@
 #pragma once
+#include <sstream>
 #include <math.h>
 #include "Couleur.h"
 #include "Point.h"
@@ -15,7 +16,7 @@ public:
 	Forme(const Couleur & couleur);
 	Forme(const Forme & forme);
 
-	const Couleur & getCouleur();
+	const Couleur & getCouleur() const { return _couleur; }
 
 	void setCouleur(const Couleur & couleur);
 
@@ -24,6 +25,10 @@ public:
 	virtual void homothetie(const Point & p, double rapport) = 0;
 	virtual void rotation(const Point & p, double angle) = 0;
 	virtual double calculAire() = 0;
+
+	virtual string toString() const = 0;
+	operator string() const;
+	friend ostream & operator<<(ostream & os, const Forme & forme);
 
 	virtual Forme * clone() const = 0;
 };

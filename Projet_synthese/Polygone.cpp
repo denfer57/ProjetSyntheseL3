@@ -5,6 +5,32 @@ Polygone::Polygone(){ }
 
 Polygone::Polygone(vector<Point> points) : listesPoints(points){ }
 
+string Polygone::toString() const
+{
+	ostringstream oss;
+	oss << " : { { ";
+	int taille = listesPoints.size();
+	for (int i = 0; i < taille; i++)
+	{
+		oss << listesPoints[i];
+		if (taille > i + 1)
+			oss << ",";
+		oss << " ";
+	}
+	oss << "}, Couleur : " << getCouleur() << " }";
+	return oss.str();
+}
+
+int Polygone::getNombrePoints()
+{
+	return listesPoints.size();
+}
+
+void Polygone::visite(Visiteur *v)
+{
+	v->visite(this);
+}
+
 void Polygone::translation(double translationX, double translationY)
 {
 	vector<Point>::iterator it;
@@ -54,18 +80,13 @@ void Polygone::rotation(const Point & p, double angle)
 	}
 }
 
-void Polygone::visite(Visiteur *v)
-{
-	v->visite(this);
-}
-
 double Polygone::calculAire()
 {
 	// Application de la méthode de https://fr.wikihow.com/calculer-la-surface-d%27un-polygone #3
 	vector<Point>::iterator itXFirst;
 	vector<Point>::iterator itYFirst;
 	Point pointCourantX, pointCourantY, pointSuivantX, pointSuivantY;
-	double xFirst, yFirst, aireGlobale;
+	double xFirst = 0, yFirst = 0, aireGlobale = 0;
 	itXFirst = listesPoints.begin();
 	itYFirst = listesPoints.begin();
 	while (itXFirst != listesPoints.end()) {
@@ -84,6 +105,6 @@ double Polygone::calculAire()
 		xFirst += (pointCourantX.getX()*pointSuivantY.getY());
 		yFirst += (pointCourantY.getY()*pointSuivantX.getX());
 	}
-	aireGlobale = (xFirst - yFirst)/2;
+	aireGlobale = (xFirst - yFirst) / 2;
 	return aireGlobale;
 }

@@ -1,18 +1,15 @@
 #include "Cercle.h"
 #include "Visiteur.h"
+
 Cercle::Cercle(const Point & milieu, double rayon) : _milieu(milieu), _rayon(rayon){ }
 
 Cercle::Cercle(const Point & centre, double rayon, const Couleur & couleur) : _milieu(centre), _rayon(rayon), Forme(couleur) { }
 
-const Point & Cercle::getMilieu()
+string Cercle::toString() const
 {
-	// TODO: insérer une instruction return ici
-	return _milieu;
-}
-
-double Cercle::getRayon()
-{
-	return _rayon;
+	ostringstream oss;
+	oss << "Cercle : { Centre : " << getMilieu() << ", Rayon : " << getRayon()  << " }";
+	return oss.str();
 }
 
 void Cercle::setMilieu(const Point & milieu)
@@ -23,6 +20,16 @@ void Cercle::setMilieu(const Point & milieu)
 void Cercle::setRayon(double rayon)
 {
 	_rayon = rayon;
+}
+
+void Cercle::visite(Visiteur *v)
+{
+	v->visite(this);
+}
+
+Cercle * Cercle::clone() const
+{
+	return new Cercle(*this);
 }
 
 void Cercle::translation(double translationX, double translationY)
@@ -47,7 +54,7 @@ void Cercle::rotation(const Point & p, double angle)
 	double distPY = abs(_milieu.getY() - p.getY());
 
 	// Conversion de l'angle en radians
-	double angleRad = angle * (3.141592/180);
+	double angleRad = angle * (3.141592 / 180);
 
 	// Calcul de la distance entre le nouvel emplacement du point après rotation et le centre de rotation
 	double distDeplX = cos(angleRad)*distPX - sin(angleRad)*distPY;
@@ -58,17 +65,7 @@ void Cercle::rotation(const Point & p, double angle)
 	_milieu.setY(p.getY() + distDeplY);
 }
 
-void Cercle::visite(Visiteur *v)
-{
-	v->visite(this);
-}
-
 double Cercle::calculAire()
 {
 	return (_rayon * _rayon * 3.141592);
-}
-
-Cercle * Cercle::clone() const
-{
-	return new Cercle(*this);
 }

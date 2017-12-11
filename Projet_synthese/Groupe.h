@@ -10,6 +10,8 @@ public :
 	Groupe();
 	virtual ~Groupe();
 
+	int getNombreForme();
+
 	void formeNonGroupee();
 	void translation(double translationX, double translationY);
 	void homothetie(const Point & p, double rapport);

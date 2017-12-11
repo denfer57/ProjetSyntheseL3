@@ -6,14 +6,17 @@ Forme::Forme(const Couleur & couleur) : _couleur(couleur), estDansGroupe(false) 
 
 Forme::Forme(const Forme & forme) : _couleur(forme._couleur), estDansGroupe(false) { }
 
-const Couleur & Forme::getCouleur()
-{
-	// TODO: insérer une instruction return ici
-	return _couleur;
-}
-
 void Forme::setCouleur(const Couleur & couleur)
 {
 	_couleur = couleur;
 }
 
+Forme::operator string() const
+{
+	return toString();
+}
+
+ostream & operator<<(ostream & os, const Forme & forme)
+{
+	return os << string(forme);
+}

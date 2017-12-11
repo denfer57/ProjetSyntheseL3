@@ -20,17 +20,20 @@ void main()
 {
 	Forme * dessin = faitDessin();
 	testDessin(dessin);
+	system("Pause");
 }
 
 Forme * faitDessin() {
-	Cercle * c = new Cercle(Point(300, 300), 50.5, Couleur::Red);
-	return c;
+	//Cercle OK, Segment OK
+	//Cercle * c = new Cercle(Point(300, 300), 30, Couleur::Cyan);
+	Segment * s = new Segment(Point(300, 300), Point(300, 400), Couleur("#0000FF"));
+	return s;
 }
 
 void testDessin(Forme * dessin) {
 	cout << "Veuillez patientez, affichage du dessin..." << endl;
 	VisiteurRealiseSocket * visiteurRealiseSocket = new VisiteurRealiseSocket("127.0.0.1", 8091);
-//essin->visite(visiteurRealiseSocket);
+	dessin->visite(visiteurRealiseSocket);
 }
 
 

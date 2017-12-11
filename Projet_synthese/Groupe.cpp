@@ -8,6 +8,11 @@ Groupe::~Groupe()
 	formeNonGroupee();
 }
 
+int Groupe::getNombreForme()
+{
+	return listeFormes.size();
+}
+
 void Groupe::formeNonGroupee()
 {
 	for (vector<Forme *>::iterator iterateur = listeFormes.begin(); iterateur != listeFormes.end(); ++iterateur)
@@ -51,7 +56,7 @@ void Groupe::visite(Visiteur *v)
 
 double Groupe::calculAire()
 {
-	double aireGroupe;
+	double aireGroupe = 0;
 	vector<Forme *>::iterator it;
 	Forme * formeCourante;
 	for (it = listeFormes.begin(); it != listeFormes.end(); it++) {

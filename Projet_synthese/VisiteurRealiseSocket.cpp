@@ -1,25 +1,39 @@
 #include "VisiteurRealiseSocket.h"
+#include "ConnectionSocket.h"
 
 VisiteurRealiseSocket::VisiteurRealiseSocket(const string & IP, int port): _adresseServeur(IP), _portServeurDessin(port) { }
 
-int VisiteurRealiseSocket::getPort()
+void VisiteurRealiseSocket::visite(Cercle * c)
 {
-	return _portServeurDessin;
+	envoi(envoiInfos(c));
 }
 
-const string VisiteurRealiseSocket::getIP()
+void VisiteurRealiseSocket::visite(Segment * s)
 {
-	return _adresseServeur;
+	envoi(envoiInfos(s));
 }
 
-void VisiteurRealiseSocket::setIP(const string & IP)
+void VisiteurRealiseSocket::visite(Polygone * p)
 {
-	_adresseServeur = IP;
+	envoi(envoiInfos(p));
 }
 
-void VisiteurRealiseSocket::setPort(int port)
+void VisiteurRealiseSocket::visite(Groupe * g)
 {
-	_portServeurDessin = port;
+	envoi(envoiInfos(g));
 }
 
-
+void VisiteurRealiseSocket::envoi(const string & texte)
+{
+	try
+	{
+		ConnectionSocket * cs = ConnectionSocket::getInstance();
+		cs->connecter(getIP(), getPort());
+		cs->envoyer(texte);
+		cs->deconnecter();
+	}
+	catch (exception e)
+	{
+		cout << e.what() << endl;
+	}
+}

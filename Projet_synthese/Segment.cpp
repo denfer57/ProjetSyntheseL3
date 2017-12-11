@@ -1,19 +1,16 @@
 #include "Segment.h"
 #include "Visiteur.h"
 
+string Segment::toString() const
+{
+	ostringstream oss;
+	oss << "Segment : { PointA : " << getA() << ", PointB : " << getB() << " }";
+	return oss.str();
+}
+
 Segment::Segment(Point & a, Point & b) : _a(a), _b(b){ }
 
-const Point & Segment::getA()
-{
-	// TODO: insérer une instruction return ici
-	return _a;
-}
-
-const Point & Segment::getB()
-{
-	// TODO: insérer une instruction return ici
-	return _b;
-}
+Segment::Segment(const Point & a, const Point & b, const Couleur & couleur) : _a(a), _b(b), Forme(couleur) { }
 
 void Segment::setA(const Point & a)
 {
@@ -25,6 +22,15 @@ void Segment::setB(const Point & b)
 	_b = b;
 }
 
+void Segment::visite(Visiteur *v)
+{
+	v->visite(this);
+}
+
+Segment * Segment::clone() const
+{
+	return new Segment(*this);
+}
 
 void Segment::translation(double translationX, double translationY)
 {
@@ -82,11 +88,7 @@ void Segment::rotation(const Point & p, double angle)
 	// On met les coordonnées à jour
 	_b.setX(p.getX() + distDeplX);
 	_b.setY(p.getY() + distDeplY);
-}
 
-void Segment::visite(Visiteur *v)
-{
-	v->visite(this);
 }
 
 double Segment::calculAire()
