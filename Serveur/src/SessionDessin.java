@@ -19,90 +19,54 @@ import java.net.SocketException;
 
 public class SessionDessin extends Thread
 {
-Socket socket;                  // pour dialoguer avec le client distant. Peut-on se passer de cet attribut ?
-BufferedReader fluxEntrant;     // flux entrant pour recevoir les requêtes du client
+	Socket _socket;
+	BufferedReader _fluxEntrant;
+	int _nombreClients;
+	/**
+	 * crée la session de dessin avec le client distant connecté sur socket
+	 * @throws IOException
+	 *
+	 * */
+	public SessionDessin(Socket socket, int nombreClients) throws IOException
+	{
+		_socket = socket;
+		_nombreClients = nombreClients;
+		_fluxEntrant = new BufferedReader(new InputStreamReader(_socket.getInputStream()));
+	}
 
-/**
- * crée la session de dessin avec le client distant connecté sur socket
- * @throws IOException
- *
- * */
-public SessionDessin(Socket socket) throws IOException
-{
-this.socket = socket;
-this.fluxEntrant = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
-}
+	public void run()
+	{
+		String requete = "";
+		try
+		{
+			while (_fluxEntrant.ready() && !isInterrupted())
+			{
+				requete += _fluxEntrant.readLine() + "\n";
+			}
+		}
+		catch (IOException e)
+		{
+			System.err.println("Impossible de lire dans le socket du client ");
+		}
 
-@Override
-public void run()
-{
-String requête;
+		try
+		{
+			_socket.shutdownInput();
+			_socket.close();
+		}
+		catch (IOException e)
+		{
+			System.err.println("Impossible de fermer le socket du client ");
+		}
 
-try
-    {
-    requête = this.fluxEntrant.readLine();  // lit le titre et les 4 coordonnées Ox, Oy, largeur et hauteur de la fenêtre, les arguments sont séparés par des ","
-    System.out.println("requête reçue : " + requête);
-    String arguments[] = requête.split(",");            // redondance de code à éliminer
-
-    String titre;
-    int Ox, Oy, largeur, hauteur;
-
-    titre = arguments[0].trim();
-    Ox = Integer.parseInt(arguments[1].trim());         // redondance de code à éliminer pour 8 lignes !!!! cf. lignes suivantes
-    Oy = Integer.parseInt(arguments[2].trim());
-    largeur = Integer.parseInt(arguments[3].trim());
-    hauteur = Integer.parseInt(arguments[4].trim());
-
-    CadreDessin cadreDessin = new CadreDessin(titre,Ox,Oy,largeur,hauteur);
-
-    while (true)
-        {
-        requête = this.fluxEntrant.readLine();  // lit l'instruction de tracé et les 4 paramètres entiers du tracé, les arguments sont séparés par des ","
-
-        System.out.println("requête reçue : " + requête);
-        arguments = requête.split(",");                     // redondance de code à éliminer
-
-        String opération;
-        int x1, y1, x2, y2;
-
-        opération = arguments[0].trim();
-        x1 = Integer.parseInt(arguments[1].trim());
-        y1 = Integer.parseInt(arguments[2].trim());
-        x2 = Integer.parseInt(arguments[3].trim());
-        y2 = Integer.parseInt(arguments[4].trim());
-
-        if (opération.equalsIgnoreCase("drawLine"))             // if-else à éliminer par l'utilisation du Design Pattern "Chain Of Responsibility"
-            cadreDessin.graphics.drawLine(x1,y1,x2,y2);
-
-        else
-            if (opération.equalsIgnoreCase("fillOval"))
-                cadreDessin.graphics.fillOval(x1,y1,x2,y2);
-
-            else
-                {
-                /* Opération non reconnue, on ne fait rien */
-                }
-        cadreDessin.getBufferStrategy().show();
-        } // while
-    }
-
-catch (SocketException e)
-    {
-    System.out.println("session de dessin terminée par le client");
-    }
-catch (NumberFormatException e)
-    {
-    e.printStackTrace();
-    }
-catch (IOException e)
-    {
-    e.printStackTrace();
-    }
-catch (InterruptedException e)
-    {
-    e.printStackTrace();
-    }
-}
+		System.out.println("Reçu :\n" + requete + "\n");
+		try {
+			new CadreDessin("Dessin n°" + _nombreClients, requete);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 
 }

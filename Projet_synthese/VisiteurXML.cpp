@@ -1,6 +1,6 @@
 #include "VisiteurXML.h"
 
-string VisiteurXML::decodeFormeEncode(Forme * f)
+string VisiteurXML::chercheForme(Forme * f)
 {
 	//on cherche la forme que c'est 
 	Cercle *c = dynamic_cast<Cercle*>(f);

@@ -16,8 +16,8 @@ Couleur::Couleur(const string & hexa)
 		throw Erreur("La couleur hexa doit commencer par un #");
 	//Tout est bon, on convertit
 	int r = stoi(hexa.substr(1, 2), 0, 16); // 2 premiers pour le rouge
-	int b = stoi(hexa.substr(5, 2), 0, 16); // 2 derniers pour le bleu
 	int v = stoi(hexa.substr(3, 2), 0, 16); // 2 du milieu pour le vert
+	int b = stoi(hexa.substr(5, 2), 0, 16); // 2 derniers pour le bleu
 
 	setRouge(r);
 	setBleu(b);
@@ -28,9 +28,9 @@ Couleur::operator string() const
 {
 	ostringstream os;
 
-	os << getRouge();
-	os << getVert();
-	os << getBleu();
+	os.fill('0'); os.width(3); os << getRouge() << ".";
+	os.fill('0'); os.width(3); os << getVert() << ".";
+	os.fill('0'); os.width(3); os << getBleu();
 
 	return os.str();
 }

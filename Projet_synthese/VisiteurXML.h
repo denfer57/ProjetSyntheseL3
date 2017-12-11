@@ -4,7 +4,7 @@
 class VisiteurXML : public Visiteur
 {
 protected:
-	string decodeFormeEncode(Forme * f);
+	string chercheForme(Forme * f);
 	string envoiInfos(Cercle * c);
 	string envoiInfos(Segment * s);
 	string envoiInfos(Polygone * p);

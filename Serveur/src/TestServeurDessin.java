@@ -28,7 +28,7 @@ try
         Socket socket = serveurDessin.accept();
         ++nombreClients;
         System.out.println("nouveau client connecté n° = " + nombreClients);
-        SessionDessin sessionDessin = new SessionDessin(socket);                // interlocuteur prenant en charge la session de dessin du nouveau client,
+        SessionDessin sessionDessin = new SessionDessin(socket, nombreClients);                // interlocuteur prenant en charge la session de dessin du nouveau client,
         sessionDessin.start();                                                  // il travaille dans un thread séparé, en parallèle de l'activité de serveurDessin
         }
     }

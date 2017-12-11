@@ -25,9 +25,9 @@ void main()
 
 Forme * faitDessin() {
 	//Cercle OK, Segment OK
-	//Cercle * c = new Cercle(Point(300, 300), 30, Couleur::Cyan);
-	Segment * s = new Segment(Point(300, 300), Point(300, 400), Couleur("#0000FF"));
-	return s;
+	Cercle * c = new Cercle(Point(300, 300), 30, Couleur::Yellow);
+	//Segment * s = new Segment(Point(300, 300), Point(300, 400), Couleur("#0000FF"));
+	return c;
 }
 
 void testDessin(Forme * dessin) {
