@@ -20,3 +20,8 @@ ostream & operator<<(ostream & os, const Forme & forme)
 {
 	return os << string(forme);
 }
+
+void Forme::sauvegarder(ostream &f)
+{
+    f << toString() << "\n";
+}

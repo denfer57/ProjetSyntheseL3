@@ -1,7 +1,8 @@
 #include <iostream>
 #include <string>
 #include <cmath>
-#include<winsock2.h>
+#include< winsock2.h>
+#include <fstream>
 
 #include "Erreur.h"
 #include "Couleur.h"
@@ -22,6 +23,7 @@ void testCercle();
 void testSegment();
 void testPolygone();
 void testGroupe();
+void testSauvegarde();
 
 int main()
 {
@@ -34,6 +36,7 @@ int main()
 	//testSegment();
 	//testPolygone();
 	testGroupe();
+	testSauvegarde();
 	system("Pause");
 	return (0);
 }
@@ -174,6 +177,29 @@ void testCouleur()
 	{
 		cout << e.what() << endl;
 	}
+}
+
+void testSauvegarde()
+{
+    cout << "Sauvegarde dans le fichier 'sauvegarde.txt' ...\n";
+    ofstream ofs;
+    ofs.open("sauvegarde.txt", ostream::out | ostream::trunc);
+
+    Cercle * c = new Cercle(Point(300, 300), 30, Couleur::Yellow);
+
+	Segment * s = new Segment(Point(300, 300), Point(300, 400), Couleur("#0000FF"));
+
+	Polygone * p = new Polygone(Couleur::Cyan);
+    Point p1 = Point(80, 100);
+	Point p2 = Point(130, 100);
+	Point p3 = Point(105, 50);
+	p->ajoutePoint(p1);
+	p->ajoutePoint(p2);
+	p->ajoutePoint(p3);
+	c->sauvegarder(ofs);
+	s->sauvegarder(ofs);
+    p->sauvegarder(ofs);
+    ofs.close();
 }
 
 

@@ -31,4 +31,5 @@ public:
 	friend ostream & operator<<(ostream & os, const Forme & forme);
 
 	virtual Forme * clone() const = 0;
+	void sauvegarder(ostream &f);
 };
