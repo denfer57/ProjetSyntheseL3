@@ -1,6 +1,3 @@
-#define _WINSOCK_DEPRECATED_NO_WARNINGS
-#pragma comment(lib, "ws2_32.lib")
-
 #include <iostream>
 #include <string>
 #include <cmath>
@@ -32,10 +29,10 @@ int main()
 	//translation, homothétie, aire -> polygone
 	Forme * dessin = faitDessin();
 	//testDessin(dessin);
-	testCouleur();
-	testCercle();
-	testSegment();
-	testPolygone();
+	//testCouleur();
+	//testCercle();
+	//testSegment();
+	//testPolygone();
 	testGroupe();
 	system("Pause");
 	return (0);
