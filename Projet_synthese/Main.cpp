@@ -1,5 +1,10 @@
+#define _WINSOCK_DEPRECATED_NO_WARNINGS
+#pragma comment(lib, "ws2_32.lib")
+
 #include <iostream>
 #include <string>
+#include <cmath>
+#include<winsock2.h>
 
 #include "Erreur.h"
 #include "Couleur.h"
@@ -21,18 +26,19 @@ void testSegment();
 void testPolygone();
 void testGroupe();
 
-void main()
+int main()
 {
 	//bugs :
 	//translation, homothétie, aire -> polygone
 	Forme * dessin = faitDessin();
-	testDessin(dessin);
-	//testCouleur();
-	//testCercle();
-	//testSegment();
-	//testPolygone();
-	//testGroupe();
+	//testDessin(dessin);
+	testCouleur();
+	testCercle();
+	testSegment();
+	testPolygone();
+	testGroupe();
 	system("Pause");
+	return (0);
 }
 
 Forme * faitDessin() {
@@ -41,14 +47,17 @@ Forme * faitDessin() {
 	Segment * s = new Segment(Point(300, 300), Point(300, 400), Couleur("#0000FF"));
 
 	Polygone * p = new Polygone(Couleur::Cyan);
-	p->ajoutePoint(Point(80, 100));
-	p->ajoutePoint(Point(130, 100));
-	p->ajoutePoint(Point(105, 50));
+	Point p1 = Point(80, 100);
+	Point p2 = Point(130, 100);
+	Point p3 = Point(105, 50);
+	p->ajoutePoint(p1);
+	p->ajoutePoint(p2);
+	p->ajoutePoint(p3);
 
 	Groupe * g = new Groupe();
 
 	g->ajouteForme(c);
-	g->ajouteForme(s); 
+	g->ajouteForme(s);
 	g->ajouteForme(p);
 
 	return g;
@@ -99,9 +108,12 @@ void testSegment(){
 
 void testPolygone() {
 	Polygone * p = new Polygone(Couleur::Cyan);
-	p->ajoutePoint(Point(80, 100));
-	p->ajoutePoint(Point(130, 100));
-	p->ajoutePoint(Point(105, 50));
+	Point p1 = Point(80, 100);
+	Point p2 = Point(130, 100);
+	Point p3 = Point(105, 50);
+	p->ajoutePoint(p1);
+	p->ajoutePoint(p2);
+	p->ajoutePoint(p3);
 
 	cout << p->toString() << "\n";
 	cout << "Aire de p : " << p->calculAire() << "\n";
@@ -128,16 +140,19 @@ void testGroupe() {
 	Segment * s = new Segment(Point(300, 300), Point(300, 400), Couleur("#0000FF"));
 
 	Polygone * p = new Polygone(Couleur::Cyan);
-	p->ajoutePoint(Point(80, 100));
-	p->ajoutePoint(Point(130, 100));
-	p->ajoutePoint(Point(105, 50));
+    Point p1 = Point(80, 100);
+	Point p2 = Point(130, 100);
+	Point p3 = Point(105, 50);
+	p->ajoutePoint(p1);
+	p->ajoutePoint(p2);
+	p->ajoutePoint(p3);
 
 	Groupe * g = new Groupe();
 
 	g->ajouteForme(c);
 	g->ajouteForme(s);
 	g->ajouteForme(p);
-	
+
 	cout << g->toString() << "\n";
 	cout << "Aire de g : " << g->calculAire() << "\n";
 }

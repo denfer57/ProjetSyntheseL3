@@ -12,8 +12,8 @@ public:
 	Segment(Point &a, Point &b);
 	Segment(const Point & a, const Point & b, const Couleur & couleur);
 
-	const Point & Segment::getA() const { return _a; }
-	const Point & Segment::getB() const { return _b; }
+	const Point & getA() const { return _a; }
+	const Point & getB() const { return _b; }
 
 	void setA(const Point &a);
 	void setB(const Point &b);

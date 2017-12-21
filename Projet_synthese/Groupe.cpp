@@ -8,7 +8,8 @@ string Groupe::toString() const
 	int nbFormes = listeFormes.size();
 	for (int i = 0; i < nbFormes; i++)
 	{
-		oss << listeFormes[i];
+
+		oss << &listeFormes[i];
 		oss << ", Couleur : " << listeFormes[i]->getCouleur();
 		if (nbFormes > i + 1)
 			oss << " / ";

@@ -43,8 +43,10 @@ void Segment::translation(double translationX, double translationY)
 void Segment::homothetie(const Point & p, double rapport)
 {
 	// a
-	double distPX = abs(_a.getX() - p.getX());
-	double distPY = abs(_a.getY() - p.getY());
+	double distPX = _a.getX() - p.getX();
+	distPX = abs(distPX);
+	double distPY = _a.getY() - p.getY();
+	distPY = abs(distPY);
 	_a.setX(p.getX() + (distPX*rapport));
 	_a.setY(p.getY() + (distPY*rapport));
 

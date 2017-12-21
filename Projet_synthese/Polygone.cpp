@@ -37,10 +37,14 @@ void Polygone::translation(double translationX, double translationY)
 {
 	vector<Point>::iterator it;
 	Point pointCourant;
+	double valeurX, valeurY;
 	for (it = listesPoints.begin(); it != listesPoints.end(); it++) {
 		pointCourant = *it;
-		pointCourant.setX(translationX + pointCourant.getX());
-		pointCourant.setY(translationY + pointCourant.getY());
+		valeurX =pointCourant.getX() + translationX;
+		valeurY =pointCourant.getY() + translationY;
+		pointCourant.setX(valeurX);
+		pointCourant.setY(valeurY);
+        *it = pointCourant;
 	}
 }
 
@@ -51,10 +55,13 @@ void Polygone::homothetie(const Point & p, double rapport)
 	double distPX, distPY;
 	for (it = listesPoints.begin(); it != listesPoints.end(); it++) {
 		pointCourant = *it;
-		distPX = abs(pointCourant.getX() - p.getX());
-		distPY = abs(pointCourant.getY() - p.getY());
+		distPX = pointCourant.getX() - p.getX();
+		distPX = abs(distPX);
+		distPY = pointCourant.getY() - p.getY();
+		distPY = abs(distPY);
 		pointCourant.setX(p.getX() + (distPX*rapport));
 		pointCourant.setY(p.getY() + (distPY*rapport));
+        *it = pointCourant;
 	}
 }
 
@@ -66,8 +73,10 @@ void Polygone::rotation(const Point & p, double angle)
 	for (it = listesPoints.begin(); it != listesPoints.end(); it++) {
 		pointCourant = *it;
 		// Calcul des distances entre le centre de rotation et le centre du cercle à faire tourner
-		distPX = abs(pointCourant.getX() - p.getX());
-		distPY = abs(pointCourant.getY() - p.getY());
+		distPX = pointCourant.getX() - p.getX();
+		distPX = abs(distPX);
+		distPY = pointCourant.getY() - p.getY();
+		distPY = abs(distPY);
 
 		// Conversion de l'angle en radians
 		angleRad = angle * (3.141592 / 180);
@@ -79,6 +88,7 @@ void Polygone::rotation(const Point & p, double angle)
 		// On met les coordonnées à jour
 		pointCourant.setX(p.getX() + distDeplX);
 		pointCourant.setY(p.getY() + distDeplY);
+        *it = pointCourant;
 	}
 }
 
@@ -107,7 +117,9 @@ double Polygone::calculAire()
 		xFirst += (pointCourantX.getX()*pointSuivantY.getY());
 		yFirst += (pointCourantY.getY()*pointSuivantX.getX());
 	}
-	aireGlobale = (xFirst - yFirst) / 2;
+	xFirst = abs(xFirst);
+	yFirst = abs(yFirst);
+	aireGlobale = (yFirst - xFirst) / 2;
 	return aireGlobale;
 }
 

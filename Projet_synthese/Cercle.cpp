@@ -40,8 +40,10 @@ void Cercle::translation(double translationX, double translationY)
 
 void Cercle::homothetie(const Point & p, double rapport)
 {
-	double distPX = abs(_milieu.getX() - p.getX());
-	double distPY = abs(_milieu.getY() - p.getY());
+	double distPX = _milieu.getX() - p.getX();
+	distPX = fabs(distPX);
+	double distPY = _milieu.getY() - p.getY();
+	distPY = fabs(distPY);
 	_milieu.setX(p.getX() + (distPX*rapport));
 	_milieu.setY(p.getY() + (distPY*rapport));
 	_rayon = _rayon*rapport;
@@ -50,8 +52,10 @@ void Cercle::homothetie(const Point & p, double rapport)
 void Cercle::rotation(const Point & p, double angle)
 {
 	// Calcul des distances entre le centre de rotation et le centre du cercle à faire tourner
-	double distPX = abs(_milieu.getX() - p.getX());
-	double distPY = abs(_milieu.getY() - p.getY());
+	double distPX = _milieu.getX() - p.getX();
+	distPX = fabs(distPX);
+	double distPY = _milieu.getY() - p.getY();
+    distPY = fabs(distPY);
 
 	// Conversion de l'angle en radians
 	double angleRad = angle * (3.141592 / 180);
