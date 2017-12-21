@@ -7,8 +7,8 @@ class Segment : public Forme
 private:
 	Point _a;
 	Point _b;
-	string toString() const;
 public:
+	string toString() const;
 	Segment(Point &a, Point &b);
 	Segment(const Point & a, const Point & b, const Couleur & couleur);
 

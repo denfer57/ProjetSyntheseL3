@@ -6,8 +6,8 @@
 class Polygone : public Forme {
 private :
 	vector<Point> listesPoints;
-	string toString() const;
 public :
+	string toString() const;
 	Polygone();
 	Polygone(vector<Point> points);
 	Polygone(const Couleur & couleur);

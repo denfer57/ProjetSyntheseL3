@@ -9,11 +9,11 @@ string Groupe::toString() const
 	for (int i = 0; i < nbFormes; i++)
 	{
 		oss << listeFormes[i];
+		oss << ", Couleur : " << listeFormes[i]->getCouleur();
 		if (nbFormes > i + 1)
-			oss << ",";
-		oss << " ";
+			oss << " / ";
+		else oss << " } ";
 	}
-	oss << "}, Couleur : " << getCouleur() << " }";
 	return oss.str();
 }
 

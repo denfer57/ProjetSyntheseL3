@@ -5,8 +5,8 @@
 class Groupe : public Forme {
 private :
 	vector<Forme *> listeFormes;
-	string toString() const;
 public :
+	string toString() const;
 	Groupe();
 	virtual ~Groupe();
 

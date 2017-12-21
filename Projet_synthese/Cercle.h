@@ -4,10 +4,10 @@
  
 class Cercle : public Forme {
 private:
-	string toString() const;
 	Point _milieu;
 	double _rayon;
 public :
+	string toString() const;
 	Cercle(const Point & milieu, double rayon);
 	Cercle(const Point & centre, double rayon, const Couleur & couleur);
 
