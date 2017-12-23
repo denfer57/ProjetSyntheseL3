@@ -24,25 +24,25 @@ void testSegment();
 void testPolygone();
 void testGroupe();
 void testSauvegarde();
+void testChargement();
 
 int main()
 {
-	//bugs :
-	//translation, homothétie, aire -> polygone
 	Forme * dessin = faitDessin();
-	//testDessin(dessin);
+	testDessin(dessin);
 	//testCouleur();
 	//testCercle();
 	//testSegment();
 	//testPolygone();
-	testGroupe();
-	testSauvegarde();
+	//testGroupe();
+	//testSauvegarde();
+	//testChargement();
 	system("Pause");
 	return (0);
 }
 
 Forme * faitDessin() {
-	Cercle * c = new Cercle(Point(300, 300), 30, Couleur::Yellow);
+	/*Cercle * c = new Cercle(Point(300, 300), 30, Couleur::Yellow);
 
 	Segment * s = new Segment(Point(300, 300), Point(300, 400), Couleur("#0000FF"));
 
@@ -58,9 +58,81 @@ Forme * faitDessin() {
 
 	g->ajouteForme(c);
 	g->ajouteForme(s);
-	g->ajouteForme(p);
+	g->ajouteForme(p);*/
 
-	return g;
+	Polygone * T1 = new Polygone(Couleur::Green);
+	Point p1T1 = Point(1, 0);
+	Point p2T1= Point(4, -2);
+	Point p3T1 = Point(4, 2);
+	T1->ajoutePoint(p1T1);
+	T1->ajoutePoint(p2T1);
+	T1->ajoutePoint(p3T1);
+	cout << T1->toString() << "\n";
+
+	Cercle * C1 = new Cercle(Point(7, 0), 2, Couleur::Yellow);
+	cout << C1->toString() << "\n";
+
+	Polygone * R1 = new Polygone(Couleur::Blue);
+	Point p1R1 = Point(11, -1);
+	Point p2R1 = Point(15, -1);
+	Point p3R1 = Point(15, 1);
+	Point p4R1 = Point(11, 1);
+	R1->ajoutePoint(p1R1);
+	R1->ajoutePoint(p2R1);
+	R1->ajoutePoint(p3R1);
+	R1->ajoutePoint(p4R1);
+	cout << R1->toString() << "\n";
+
+	Polygone * T2 = new Polygone(Couleur::Green);
+	Point p1T2 = Point(6, -1);
+	Point p2T2 = Point(8, 0);
+	Point p3T2 = Point(6, 1);
+	T2->ajoutePoint(p1T2);
+	T2->ajoutePoint(p2T2);
+	T2->ajoutePoint(p3T2);
+	cout << T2->toString() << "\n";
+
+	Cercle * C2 = new Cercle(Point(17, 0), 1, Couleur::Yellow);
+	cout << C2->toString() << "\n";
+
+	Groupe * G1 = new Groupe(Couleur::Red);
+	G1->ajouteForme(T1);
+	G1->ajouteForme(C1);
+	G1->ajouteForme(R1);
+	G1->ajouteForme(T2);
+	G1->ajouteForme(C2);
+	cout << G1->toString() << "\n";
+
+	G1->translation(-4, 0);
+	cout << G1->toString() << "\n";
+	//G1->rotation(Point(0, 0), 45);
+	cout << G1->toString() << "\n";
+	cout << "Aire de G1 : " << G1->calculAire() << "\n";
+	G1->homothetie(Point(-10,-10),15);
+	
+	cout << "Sauvegarde dans le fichier 'majoliefigure2.txt' ...\n";
+	ofstream ofs("majoliefigure2.txt", ostream::out | ostream::trunc);
+
+	if (ofs) {
+		G1->sauvegarder(ofs);
+		ofs.close();
+	}
+	else Erreur("Erreur lors de l'ouverture du fichier");
+
+	cout << "Chargement du fichier 'majoliefigure2.txt' ...\n";
+	ifstream ifs("majoliefigure2.txt", ostream::in);
+
+	if (ifs) {
+		string ligne;
+		while (getline(ifs, ligne))
+		{
+			cout << ligne << endl;
+		}
+		ifs.close();
+	}
+	else Erreur("Impossible d'ouvrir le fichier !");
+
+	return G1;
 }
 
 void testDessin(Forme * dessin) {
@@ -182,25 +254,43 @@ void testCouleur()
 void testSauvegarde()
 {
     cout << "Sauvegarde dans le fichier 'sauvegarde.txt' ...\n";
-    ofstream ofs;
-    ofs.open("sauvegarde.txt", ostream::out | ostream::trunc);
+    ofstream ofs("sauvegarde.txt", ostream::out | ostream::trunc);
 
-    Cercle * c = new Cercle(Point(300, 300), 30, Couleur::Yellow);
+	if (ofs) {
+		Cercle * c = new Cercle(Point(300, 300), 30, Couleur::Yellow);
 
-	Segment * s = new Segment(Point(300, 300), Point(300, 400), Couleur("#0000FF"));
+		Segment * s = new Segment(Point(300, 300), Point(300, 400), Couleur("#0000FF"));
 
-	Polygone * p = new Polygone(Couleur::Cyan);
-    Point p1 = Point(80, 100);
-	Point p2 = Point(130, 100);
-	Point p3 = Point(105, 50);
-	p->ajoutePoint(p1);
-	p->ajoutePoint(p2);
-	p->ajoutePoint(p3);
-	c->sauvegarder(ofs);
-	s->sauvegarder(ofs);
-    p->sauvegarder(ofs);
-    ofs.close();
+		Polygone * p = new Polygone(Couleur::Cyan);
+		Point p1 = Point(80, 100);
+		Point p2 = Point(130, 100);
+		Point p3 = Point(105, 50);
+		p->ajoutePoint(p1);
+		p->ajoutePoint(p2);
+		p->ajoutePoint(p3);
+		c->sauvegarder(ofs);
+		s->sauvegarder(ofs);
+		p->sauvegarder(ofs);
+		ofs.close();
+	}
+	else
+		Erreur("Impossible d'ouvrir le fichier !");
 }
 
+void testChargement()
+{
+	cout << "Chargement du fichier 'sauvegarde.txt' ...\n";
+	ifstream ifs("sauvegarde.txt", ostream::in);
+	
+	if (ifs) {
+		string ligne;
+		while (getline(ifs, ligne))
+		{
+			cout << ligne << endl; 
+		}
+		ifs.close();
+	}
+	else Erreur("Impossible d'ouvrir le fichier !");
+}
 
 

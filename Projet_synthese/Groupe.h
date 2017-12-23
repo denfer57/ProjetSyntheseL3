@@ -5,9 +5,13 @@
 class Groupe : public Forme {
 private :
 	vector<Forme *> listeFormes;
+	Couleur _couleur;
 public :
 	string toString() const;
+
 	Groupe();
+	Groupe::Groupe(const Couleur & couleur);
+
 	virtual ~Groupe();
 
 	int getNombreForme();

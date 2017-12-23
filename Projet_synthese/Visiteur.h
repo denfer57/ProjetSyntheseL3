@@ -2,7 +2,6 @@
 #include "Polygone.h"
 #include "Groupe.h"
 #include "Segment.h"
-#include "Point.h"
 
 class Visiteur
 {

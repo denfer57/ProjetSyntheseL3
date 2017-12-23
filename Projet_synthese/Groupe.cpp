@@ -11,13 +11,15 @@ string Groupe::toString() const
 		oss << listeFormes[i]->toString();
 		oss << ", Couleur : " << listeFormes[i]->getCouleur();
 		if (nbFormes > i + 1)
-			oss << " / ";
+			oss << "\n";
 		else oss << " } ";
 	}
 	return oss.str();
 }
 
-Groupe::Groupe(){ }
+Groupe::Groupe() : _couleur(Couleur::Black){ }
+
+Groupe::Groupe(const Couleur & couleur) : _couleur(couleur) { }
 
 Groupe::~Groupe()
 {
@@ -85,6 +87,7 @@ double Groupe::calculAire()
 void Groupe::ajouteForme(Forme * f)
 {
 	//tester si elle existe deja
+	f->setCouleur(_couleur);
 	listeFormes.push_back(f);
 }
 

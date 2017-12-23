@@ -19,7 +19,7 @@ string Polygone::toString() const
 			oss << ",";
 		oss << " ";
 	}
-	oss << "}, Couleur : " << getCouleur() << " }";
+	oss << "}";
 	return oss.str();
 }
 
